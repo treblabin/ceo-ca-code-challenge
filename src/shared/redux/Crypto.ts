@@ -1,8 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { RootState } from "./Store";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ReduxCryptoDataType } from "../../assets/types/CryptoData";
+import { apis } from "../api";
+
+export const getBitcoinPrice = createAsyncThunk(
+  "users/getBitcoinPrice",
+  async () => {
+    const response = await apis.getBitcoinPrice();
+    console.log(response.data);
+    return response.data;
+  }
+);
 
 const initialState: ReduxCryptoDataType = {
+  error: null,
+  loading: false,
   value: {
     bpi: {
       EUR: {
@@ -38,18 +49,24 @@ const initialState: ReduxCryptoDataType = {
 };
 
 export const CryptoSlice = createSlice({
-  initialState,
-
-  name: "crypto",
-  reducers: {
-    loadCrypto: (state, action) => {
+  extraReducers: {
+    [getBitcoinPrice.pending.type]: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [getBitcoinPrice.fulfilled.type]: (state, action) => {
+      state.loading = false;
       state.value = action.payload;
+      state.error = null;
+    },
+    [getBitcoinPrice.rejected.type]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
     },
   },
+  initialState,
+  name: "crypto",
+  reducers: {},
 });
-
-export const { loadCrypto } = CryptoSlice.actions;
-
-export const selectCount = (state: RootState) => state.Crypto.value;
 
 export default CryptoSlice.reducer;

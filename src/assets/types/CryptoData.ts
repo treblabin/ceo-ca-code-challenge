@@ -32,5 +32,7 @@ export interface CryptoDataType {
 }
 
 export interface ReduxCryptoDataType {
+  error: object | null;
+  loading: boolean;
   value: CryptoDataType;
 }
