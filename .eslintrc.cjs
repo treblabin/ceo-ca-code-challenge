@@ -6,7 +6,7 @@ module.exports = {
     "plugin:react/jsx-runtime",
     "plugin:@typescript-eslint/recommended",
     "eslint:recommended",
-    "prettier",
+    "plugin:prettier/recommended",
   ],
   globals: {
     process: true,
@@ -67,7 +67,7 @@ module.exports = {
       "error",
       {
         multiline: {
-          delimiter: "none",
+          delimiter: "semi",
           requireLast: true,
         },
         singleline: {
@@ -97,7 +97,7 @@ module.exports = {
         selector: "classProperty",
       },
       {
-        format: ["camelCase"],
+        format: ["camelCase", "UPPER_CASE", "snake_case"],
         leadingUnderscore: "allowSingleOrDouble",
         selector: "typeProperty",
         trailingUnderscore: "allowSingleOrDouble",
@@ -172,7 +172,7 @@ module.exports = {
       {
         ignoreGlobals: true,
         ignoreImports: true,
-        properties: "always",
+        properties: "never",
       },
     ],
     "comma-dangle": ["error", "only-multiline"],
@@ -508,8 +508,8 @@ module.exports = {
         project: ["tsconfig.json"],
       },
     },
-    "react": {
-      "version": "detect",
+    react: {
+      version: "detect",
     },
   },
 };
