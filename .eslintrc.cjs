@@ -32,6 +32,13 @@ module.exports = {
       },
     },
     {
+      // theme.ts
+      files: ["theme.ts"],
+      rules: {
+        "sort-keys-fix/sort-keys-fix": "off",
+      },
+    },
+    {
       // js
       files: ["**/*.js"],
       rules: {

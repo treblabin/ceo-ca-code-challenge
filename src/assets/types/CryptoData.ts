@@ -36,3 +36,13 @@ export interface ReduxCryptoDataType {
   loading: boolean;
   value: CryptoDataType;
 }
+
+export interface BpiData {
+  bpiData: {
+    code: string;
+    description: string;
+    rate: string;
+    rate_float: number;
+    symbol: string;
+  };
+}
